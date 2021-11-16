@@ -1,0 +1,1 @@
+// Add eventlistner to .fa-cart-plus to add product to cart
