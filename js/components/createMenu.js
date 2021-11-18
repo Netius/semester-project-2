@@ -8,12 +8,12 @@ export default function createMenu() {
     let authLink = `<a href="login.html" class="${pathname === "/login.html" ? "active" : ""} nav-link">Login</a>`;
     
     if (username) {
-        authLink = `<a href="/" class="${pathname === "/" ? "active" : ""} nav-link">Logout</a>
+        authLink = `<a href="/" class="${pathname === "/" ? "active" : ""} nav-link">Logout</a> 
                 </li>
                 <li class="nav-item">
                     <a href="add.html" class="${pathname === "/add.html" ? "active" : ""} nav-link">Add product</a>
                     `;
-    };
+    }; // Logoutlink needs to removeItem(tokenKey and userKey) from localstorage...
 
     container.innerHTML = `
         <div class="container-fluid">

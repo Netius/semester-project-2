@@ -17,23 +17,22 @@ export function submitAddForm() {
         const titleValue = title.value.trim();
         const priceValue = parseFloat(price.value);
         const descriptionValue = description.value.trim();
-        const imageValue = image.value.trim(); //newline
+        const imageValue = image.value.trim(); 
     
         if (titleValue.length === 0 || priceValue === 0 || descriptionValue === 0) {
             return displayMessage("warning", "Please supply proper values", ".message-container");
         }
 
-        addProduct(titleValue, priceValue, descriptionValue, imageValue); //newline
+        addProduct(titleValue, priceValue, descriptionValue, imageValue);
 
     };
 
-    async function addProduct(title, price, description, image ) { //newline
+  
+  
+    async function addProduct(title, price, description, image ) {
         const url = baseUrl + "/products";
-        const imgUrl = baseUrl + "/upload"; //newline
 
-        const image_url = image.url;
-
-        const data = JSON.stringify({ title: title, price: price, description: description, image_url: image }); //newline
+        const data = JSON.stringify({ title: title, price: price, description: description, image_url: image }); // adds the image to C:\fakepath\"filename..."
 
         const token = getToken();
 
@@ -48,7 +47,7 @@ export function submitAddForm() {
 
         
         try {
-            const response = await fetch(url && imgUrl, options); //newline
+            const response = await fetch(url, options);
             const json = await response.json();
 
             if (json.created_at) {
@@ -63,42 +62,5 @@ export function submitAddForm() {
         }
         
     }
-
-
-
-// Tester Upload file during entry creation fra strapi documentation
-    
-/* form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const request = new XMLHttpRequest();
-
-  const formData = new FormData();
-
-  const formElements = form.elements;
-
-  const data = {};
-
-  for (let i = 0; i < formElements.length; i++) {
-    const currentElement = formElements[i];
-    if (!['submit', 'file'].includes(currentElement.type)) {
-      data[currentElement.title] = currentElement.value;
-    } else if (currentElement.type === 'file') {
-      for (let i = 0; i < currentElement.files.length; i++) {
-        const file = currentElement.files[i];
-        formData.append(`files.${currentElement.title}`, file, file.title);
-      }
-    }
-  }
-
-  formData.append('data', JSON.stringify(data));
-
-  request.open('POST', `${baseUrl}/upload`);
-
-  request.send(formData);
-});
- */
-
-
 
 }
