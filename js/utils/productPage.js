@@ -1,4 +1,7 @@
 import { baseUrl } from "../settings/api.js";
+import createMenu from "../components/createMenu.js";
+
+createMenu();
 
 const productContainer = document.querySelector(".product-container");
 const queryString = document.location.search;

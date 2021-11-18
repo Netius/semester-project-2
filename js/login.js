@@ -47,8 +47,6 @@ async function doLogin(username, password) {
         console.log(json)
 
         if (json.user) {
-/*             displayMessage("success text-light", "YEY!", ".message-container");
- */
             location.href = "/";
             
             saveToken(json.jwt);

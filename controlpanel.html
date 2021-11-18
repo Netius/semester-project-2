@@ -18,7 +18,7 @@
 <div class="container-fluid px-5">
     <div class="form-signin text-center">
         <h1>Welcome to the controlpanel</h1>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProduct">Add product</button>
+        <a href="add.html" class="btn btn-success">Add product</a>
         <button class="btn btn-danger">Delete product</button>
         <div class="producttable">
             <table class="table table-striped">
@@ -27,6 +27,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Title</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Featured</th>
                         <th scope="col" class="d-none d-md-block">Image</th>
                     </tr>
                 </thead>
@@ -38,46 +39,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="addProduct" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title">Add product</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form>
-                <div class="my-3 px-3">
-                    <input type="text" class="form-control" id="productTitle" placeholder="Title">
-                </div>
-                <div class="mb-3 px-3">
-                    <input type="number" class="form-control" id="productPrice" placeholder="Price">
-                </div>
-                <div class="mb-3 px-3">
-                    <input type="text" class="form-control" id="productDescription" placeholder="Description">
-                </div>
-                <div class="input-group mb-3 px-3">
-                    <input type="file" class="form-control" id="productImage">
-                    <label class="input-group-text" for="productImage">Upload</label>
-                </div>
-                <div class="message-container px-3">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add product</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!--    Modal for adding products goes here -->
-  </div>
-
 <!--    footer  -->
 <footer class="mt-auto py-3 bg-light">
     <p class="text-center">This is the footer</p>
 </footer>
     <script src="./js/admin.js" type="module"></script>
-    <script src="./js/adminData/addProduct.js" type="module"></script>
+    <script src="./js/utils/addProduct.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

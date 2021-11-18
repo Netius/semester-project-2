@@ -8,8 +8,12 @@ export default function createMenu() {
     let authLink = `<a href="login.html" class="${pathname === "/login.html" ? "active" : ""} nav-link">Login</a>`;
     
     if (username) {
-        authLink = `<a href="controlpanel.html" class="${pathname === "/controlpanel.html" ? "active" : ""} nav-link">Controlpanel</a>`;
-    }
+        authLink = `<a href="/" class="${pathname === "/" ? "active" : ""} nav-link">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a href="add.html" class="${pathname === "/add.html" ? "active" : ""} nav-link">Add product</a>
+                    `;
+    };
 
     container.innerHTML = `
         <div class="container-fluid">
