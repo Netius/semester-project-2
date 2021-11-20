@@ -33,8 +33,8 @@ export function renderDataInput() {
             title.value = details.title;
             price.value = details.price;
             description.value = details.description;
-            image.value = details.image.name;
-            idInput.value = details.id;
+/*             image.value = details.image;
+ */            idInput.value = details.id;
     
             console.log(details);
             
@@ -59,29 +59,31 @@ export function submitEditForm() {
         const titleValue = title.value.trim();
         const priceValue = parseFloat(price.value);
         const descriptionValue = description.value.trim();
+        const imageValue = image.files[0];
         const idValue = idInput.value;
      
         if (titleValue.length === 0 || priceValue === 0 || descriptionValue === 0) {
             return displayMessage("warning", "Please supply proper values", ".message-container");
         }
     
-        updateProduct(titleValue, priceValue, descriptionValue, idValue);
+        updateProduct(titleValue, priceValue, descriptionValue, imageValue, idValue);
     
     }
 }
 
-async function updateProduct(title, price, description, id) {
-
+async function updateProduct( title, price, description, image, id ) {
     const url = baseUrl + "/products/" + id;
-    const data = JSON.stringify({ title: title, price: price, description: description })
+    const formData = new FormData();
+    formData.append("files.image", image, image.name);
 
+    const data = JSON.stringify({ title: title, price: price, description: description })
+    formData.append("data", data);
     const token = getToken();
 
     const options = {
         method: "PUT",
-        body: data,
+        body: formData,
         headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
     };

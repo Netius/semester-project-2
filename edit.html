@@ -29,8 +29,11 @@
         <input class="form-control" type="text" id="price">
         <label for="description">Description</label>
         <input class="form-control" type="text" id="description">
-        <label for="productImage">Product image url</label>
-        <input class="form-control" type="text" id="image">
+        <label for="image">Product image url</label>
+        <div class="input-group">
+            <input type="file" class="form-control" id="image">
+            <label class="input-group-text" for="image">Upload</label>
+        </div>
         <div class="form-check form-switch mt-3">
             <label class="form-check-label" for="productFeature">Is product featured?</label>
             <input class="form-check-input" type="checkbox" id="productFeature">

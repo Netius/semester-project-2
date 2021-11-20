@@ -17,7 +17,7 @@ export function submitAddForm() {
         const titleValue = title.value.trim();
         const priceValue = parseFloat(price.value);
         const descriptionValue = description.value.trim();
-        const imageValue = image.value.trim(); 
+        const imageValue = image.files[0]; 
     
         if (titleValue.length === 0 || priceValue === 0 || descriptionValue === 0) {
             return displayMessage("warning", "Please supply proper values", ".message-container");
@@ -32,15 +32,17 @@ export function submitAddForm() {
     async function addProduct(title, price, description, image ) {
         const url = baseUrl + "/products";
 
-        const data = JSON.stringify({ title: title, price: price, description: description, image_url: image }); // adds the image to C:\fakepath\"filename..."
+        const formData = new FormData();
+        formData.append("files.image", image, image.name);
 
+        const data = JSON.stringify({ title: title, price: price, description: description }); 
+        formData.append("data", data)
         const token = getToken();
 
         const options = {
             method: "POST",
-            body: data,
+            body: formData,
             headers: {
-                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             },
         };
@@ -50,8 +52,10 @@ export function submitAddForm() {
             const response = await fetch(url, options);
             const json = await response.json();
 
+
             if (json.created_at) {
                 displayMessage("success text-light text-center", "Product added", ".message-container");
+
             }
             if (json.error) {
                 displayMessage("danger", json.message , ".message-container");
