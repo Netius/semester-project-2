@@ -17,26 +17,27 @@ export function submitAddForm() {
         const titleValue = title.value.trim();
         const priceValue = parseFloat(price.value);
         const descriptionValue = description.value.trim();
+        const featureValue = productFeature.checked;
         const imageValue = image.files[0]; 
     
         if (titleValue.length === 0 || priceValue === 0 || descriptionValue === 0) {
             return displayMessage("warning", "Please supply proper values", ".message-container");
         }
 
-        addProduct(titleValue, priceValue, descriptionValue, imageValue);
+        addProduct(titleValue, priceValue, descriptionValue, featureValue, imageValue);
 
     };
 
   
   
-    async function addProduct(title, price, description, image ) {
+    async function addProduct(title, price, description, feature, image ) {
         const url = baseUrl + "/products";
 
         const formData = new FormData();
         formData.append("files.image", image, image.name);
 
-        const data = JSON.stringify({ title: title, price: price, description: description }); 
-        formData.append("data", data)
+        const data = JSON.stringify({ title: title, price: price, description: description, featured: feature })
+        formData.set("data", data)
         const token = getToken();
 
         const options = {

@@ -36,3 +36,53 @@ export function renderData(dataToRender) {
 
     });
 }
+
+export function renderDataInput() {
+    const queryString = document.location.search;
+    const params = new URLSearchParams(queryString);
+    const paramId = params.get("id");
+    
+    if (!id) {
+        document.location.href = "/";
+    }
+    
+    const productUrl = baseUrl + "/products/" + paramId;
+    
+    const productContainer = document.querySelector(".product-container");
+    const loadingContainer = document.querySelector(".spinner-border")
+    const title = document.querySelector("#title");
+    const price = document.querySelector("#price");
+    const description = document.querySelector("#description");
+    const previewImg = document.querySelector("#prewImg");
+    const featured = document.querySelector("#productFeature");
+    const idInput = document.querySelector("#id");
+    
+    (async function () {
+        try {
+            const response = await fetch(productUrl);
+            const details = await response.json();
+
+            title.value = details.title;
+            price.value = details.price;
+            description.value = details.description;
+            featured.value = details.feature;
+            idInput.value = details.id;
+
+             if (details.featured === true) {
+                featured.checked = true;
+            } else {
+                featured.checked = false;
+            } 
+             
+            previewImg.src = baseUrl + details.image.url;
+    
+            
+        } catch (error) {
+            console.log(error)
+        } finally {
+            loadingContainer.style.display = "none";
+            productContainer.style.display = "block";
+        }
+    })();
+    
+}
