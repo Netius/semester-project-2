@@ -4,5 +4,6 @@ import createMenu from "./components/createMenu.js";
 
 createMenu();
 
+
 getData();
 searchData();

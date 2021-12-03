@@ -23,6 +23,11 @@ export function getUsername() {
     return null;
 }
 
+export function removeFromStorage() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+}
+
 function saveToStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
