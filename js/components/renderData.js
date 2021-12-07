@@ -1,5 +1,6 @@
 import { baseUrl } from "../settings/api.js";
 import { getUsername } from "../utils/storage.js";
+import { addToCart } from "../utils/addToCart.js";
 
 
 export function renderData(dataToRender) {
@@ -12,7 +13,7 @@ export function renderData(dataToRender) {
     
     dataToRender.forEach(function (product) {
         
-        let editBtn = `<a href="edit.html?id=${product.id}"><span class="card-text text-end text-primary fs-1"><i class="fas fa-tools"></i></span></a>`
+        let editBtn = `<a href="edit.html?id=${product.id}"><i class="fas fa-tools text-primary"></i></a>`
     
         if (!username) {
             editBtn = "";
@@ -20,21 +21,28 @@ export function renderData(dataToRender) {
 
         
         container.innerHTML += `
-        <div class="card mt-3 mx-auto" style="width: 18rem;">
-            <a href="products.html?id=${product.id}&${product.title}" class="text-decoration-none text-dark">
+        <div class="product card mt-3 mx-auto" style="width: 18rem;">
+        <a href="products.html?id=${product.id}&${product.title}" class="text-decoration-none text-dark">
             <img src="${baseUrl}${product.image.url}" alt="Picture of ${product.title}" class="card-img-top">
-                <div class="card-body">
+        </a>
+            <div class="card-body">
+                <a href="products.html?id=${product.id}&${product.title}" class="text-decoration-none text-dark">
                     <h4 class="card-title text-start">${product.title}</h4>
-                    <div class="d-flex justify-content-between">
-                        <h5 class="card-text text-start fs-1" id="price">${product.price},-</h5>
+                </a>
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-text text-start fs-1" id="price">${product.price},-</h5>
+                    <span class="card-text text-end text-success fs-1">
                         ${editBtn}
-                        <span class="card-text text-end text-success fs-1"><i class="fas fa-cart-plus"></i></span>
-                    </div>
+                        <i class="fas fa-cart-plus addToCart" data-id="${product.id}" data-name="${product.title}"></i>
+                    </span>
                 </div>
-            </a>
+            </div>
         </div>`;
 
     });
+
+    // Add eventlistener on cart to add it to the shoppingcart...
+    addToCart()
 }
 
 export function renderDataInput() {
@@ -84,5 +92,8 @@ export function renderDataInput() {
             productContainer.style.display = "block";
         }
     })();
+
     
 }
+
+
