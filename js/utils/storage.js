@@ -1,3 +1,5 @@
+import { renderCart } from "./cart.js";
+
 const tokenKey = "token";
 const userKey = "user";
 
@@ -6,7 +8,7 @@ function saveToStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
 
-// Get key from localstorage 
+// Get key from localstorage
 function getFromStorage(key) {
     const value = localStorage.getItem(key);
 
@@ -59,9 +61,26 @@ export function getExistingCart() {
     } else {
         return JSON.parse(itemsInCart);
     }
-  
 }
 // Save item to shoppingcart (localstorage)
 export function saveCart(itemsInCart) {
     localStorage.setItem("shoppingcart", JSON.stringify(itemsInCart));
+}
+
+export function removeCart() {
+    const confirmRemove = confirm("Are you sure you want to remove this item?");
+    if (confirmRemove) {
+        const id = event.target.dataset.id;
+        const currentCart = getExistingCart();
+        const productExists = currentCart.find(function (cartItem) {
+            return cartItem.id === id;
+        });
+
+        if (productExists) {
+            const newCart = currentCart.filter(
+                (cartItem) => cartItem.id !== id
+            );
+            saveCart(newCart);
+        }
+    }
 }
