@@ -81,6 +81,7 @@ export function removeCart() {
                 (cartItem) => cartItem.id !== id
             );
             saveCart(newCart);
+            renderCart();
         }
     }
 }

@@ -18,11 +18,12 @@ export function renderCart() {
         });
     }
 }
-
 renderCart();
+
 
 const removeBtn = document.querySelectorAll(".btn-danger");
 
 removeBtn.forEach((button) => {
+
     button.addEventListener("click", removeCart);
 });
